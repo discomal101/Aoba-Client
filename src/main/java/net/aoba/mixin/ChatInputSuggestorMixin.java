@@ -24,6 +24,7 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.aoba.Aoba;
 import net.aoba.cmd.Command;
 import net.aoba.cmd.CommandManager;
+import net.aoba.commands.NCommandManager;
 import net.minecraft.client.gui.screen.ChatInputSuggestor;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.command.CommandSource;

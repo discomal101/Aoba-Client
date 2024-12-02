@@ -51,7 +51,7 @@ public class AobaClient {
 	public static final String VERSION = "1.21.3";
 	public static final String AOBA_VERSION = "1.4.3";
 	public static final String CHAT_PREFIX = "[AOBA] ";
-	public static final String COMMAND_PREFIX = ".";
+	public static final String COMMAND_PREFIX = "-";
 
 	public static MinecraftClient MC;
 	public static IMinecraftClient IMC;

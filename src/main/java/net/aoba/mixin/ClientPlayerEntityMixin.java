@@ -18,6 +18,8 @@
 
 package net.aoba.mixin;
 
+import net.aoba.commands.NCommandManager;
+import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -63,6 +65,29 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 		Freecam freecam = (Freecam) Aoba.getInstance().moduleManager.freecam;
 		if (freecam.state.getValue()) {
 			cir.setReturnValue(true);
+		}
+	}
+
+	@Inject(method = "sendMessage", at = @At("HEAD"), cancellable = true)
+	private void onSendChatMessage(Text message, boolean overlay, CallbackInfo ci) {
+		// Debug print the original message
+		System.out.println("Original Message: " + message.toString());
+
+		NCommandManager CM = new NCommandManager();
+
+		// Debug print to check if the message starts with the command prefix
+		String msgString = message.toString();
+		System.out.println("Message starts with COMMAND_PREFIX: " + msgString.startsWith(NCommandManager.COMMAND_PREFIX));
+
+		// Handle the command and check if it was successful
+		boolean handled = CM.HandleCommand(msgString);
+		System.out.println("Command Handled: " + handled);
+
+		if (msgString.startsWith(NCommandManager.COMMAND_PREFIX) && handled) {
+			// Debug print to indicate that the message will be cancelled
+			System.out.println("Cancelling message due to command handling");
+			ci.cancel();
+			return;
 		}
 	}
 

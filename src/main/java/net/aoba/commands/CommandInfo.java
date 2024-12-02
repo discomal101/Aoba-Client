@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandInfo {
     String name();
-    String description();
-    String syntax();
+    String description() default "";
+    String usage() default "";
 }

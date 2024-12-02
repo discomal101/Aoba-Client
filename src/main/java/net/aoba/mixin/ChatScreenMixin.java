@@ -18,6 +18,8 @@
 
 package net.aoba.mixin;
 
+import net.aoba.AobaClient;
+import net.aoba.commands.NCommandManager;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -107,6 +109,12 @@ public class ChatScreenMixin extends ScreenMixin {
 	@Inject(at = {
 			@At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/ChatHud;addToMessageHistory(Ljava/lang/String;)V", shift = At.Shift.AFTER) }, method = "sendMessage(Ljava/lang/String;Z)V", cancellable = true)
 	public void onSendMessage(String message, boolean addToHistory, CallbackInfo ci) {
+		NCommandManager CM = new NCommandManager();
+		if (message.startsWith(AobaClient.COMMAND_PREFIX) && CM.HandleCommand(message)) {
+			ci.cancel();
+			return;
+		}
+
 		if (message.startsWith(CommandManager.PREFIX.getValue())) {
 			Aoba.getInstance().commandManager.command(message.split(" "));
 			ci.cancel();
