@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.joml.Matrix4f;
 
+import net.aoba.gui.Size;
 import net.aoba.event.events.MouseClickEvent;
 import net.aoba.event.events.MouseMoveEvent;
 import net.aoba.gui.Direction;
@@ -120,6 +121,11 @@ public class Window extends UIElement {
 		for (UIElement child : children) {
 			child.draw(drawContext, partialTicks);
 		}
+	}
+
+	@Override
+	protected Size getStartingSize(Size availableSize) {
+		return availableSize;
 	}
 
 	protected void setResizing(boolean state, MouseClickEvent event, Direction direction) {
