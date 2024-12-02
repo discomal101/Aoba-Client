@@ -26,7 +26,8 @@ import net.aoba.module.Module;
 
 public class Fullbright extends Module {
 
-	// private double previousValue = 0.0;
+	private Double oldGamma; // Use Double to allow null for initial state
+
 	public Fullbright() {
 		super("Fullbright");
 		this.setCategory(Category.of("Render"));
@@ -40,11 +41,9 @@ public class Fullbright extends Module {
 
 	@Override
 	public void onEnable() {
-
 	}
 
 	@Override
 	public void onToggle() {
-
 	}
 }
